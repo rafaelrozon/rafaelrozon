@@ -1,0 +1,16 @@
+{
+  "hello": "Olá Mundo",
+  "translations": "Traduções",
+  "discussOnTwitter": "Comentar no Twitter",
+  "editOnGithub": "Editar no Github",
+  "followOnTwitter": "Você deveria seguir ele no Twitter",
+  "builtWith": "Construído com",
+  "author": "Kyle Mathews",
+  "footer": "Escrito por {{author}}. {{authorSummary}} {{link}}",
+  "authorSummary": "Mora e trabalha em São Francisco construindo coisas úteis.",
+  "blogDescription": "Um blog de base demonstrando o que Gatsby é capaz de fazer",
+  "blogTitle": "Blog de Base Gatsby",
+  "indexPageTitle": "Todos os posts",
+  "notFound": "404: Não encontrado",
+  "notFoundWarning": "Você acabou the achar uma página que não existe. Triste..."
+}

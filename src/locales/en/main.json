@@ -1,0 +1,16 @@
+{
+    "hello": "Hello World",
+    "translations": "Translations",
+    "discussOnTwitter": "Discuss on Twitter",
+    "editOnGithub": "Edit on Github",
+    "followOnTwitter": "You should follow him on Twitter",
+    "builtWith": "Built with",
+    "author": "Kyle Mathews",
+    "footer": "Written by {{author}}. {{authorSummary}} {{link}}",
+    "authorSummary": "who lives and works in San Francisco building useful things.",
+    "blogDescription": "A starter blog demonstrating what Gatsby can do.",
+    "blogTitle": "Gatsby Starter Blog",
+    "indexPageTitle": "All Posts",
+    "notFound": "404: Not Found",
+    "notFoundWarning": "You just hit a route that doesn't exist... the sadness."
+}
