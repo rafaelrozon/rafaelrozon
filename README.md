@@ -8,7 +8,6 @@
   Gatsby's blog starter
 </h1>
 
-
 Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
 
 _Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
@@ -87,9 +86,9 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 
 Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+-   **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+-   **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
 
 ## 💫 Deploy
 
@@ -101,6 +100,17 @@ Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby f
 
 ## TO DO
 
-- [ ] Update README with instructions
-- [ ] Add unit tests
-- [ ] Update Github settings
+-   [ ] Update README with instructions
+-   [ ] Add unit tests
+-   [ ] Update Github settings
+-   [ ] add analytics
+-   [X] update license
+-   [X] fix photo
+-   [ ] review texts
+-   [ ] tests?
+-   [ ] convert to typescript
+-   [ ] favicon
+-   [ ] create banner
+-   [ ] create banner for code snippets with my name on it
+-   [ ] update package.json
+-   [ ] lint staged
