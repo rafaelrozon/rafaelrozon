@@ -4,6 +4,9 @@
     "description": "",
     "license": "0BSD",
     "private": true,
+    "engines": {
+        "node": "14.x"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rafaelrozon/thecodefront.git"
@@ -27,7 +30,6 @@
         "html"
     ],
     "main": "n/a",
-    "engines": {"node": "14.x"},
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
@@ -43,9 +45,14 @@
         "format:pkg": "format-package -w",
         "lint": "eslint src --ext .ts --ext .tsx --ext .js --ext .jsx",
         "postinstall": "yarn format:pkg",
+        "prepare": "husky install",
         "serve": "gatsby serve",
         "start": "npm run develop",
         "test": "jest"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,json,md}": "prettier --write",
+        "*.{ts,tsx,js,jsx}": "eslint --cache --fix"
     },
     "dependencies": {
         "@emotion/react": "^11.1.5",
@@ -113,6 +120,7 @@
         "husky": "^6.0.0",
         "jest": "^26.6.3",
         "json": "^10.0.0",
+        "lint-staged": ">=10",
         "prettier": "^2.2.1",
         "prettier-eslint-cli": "^5.0.1",
         "ts-jest": "^26.5.4",
