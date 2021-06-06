@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 /** @jsx jsx */
@@ -5,12 +6,12 @@ import { jsx, css } from '@emotion/react';
 
 import { usePageContext } from '../context/PageContext';
 
-const Link = ({ to, language, children, className, hrefLang, itemProp, rel, style, noDecoration }) => {
+const Link = ({ to, language, children, className, hrefLang, itemProp, rel, style, noDecoration, byPass, ...others }) => {
     const { lang } = usePageContext();
 
     let href = `/${lang}${to}`;
 
-    if (language) {
+    if (language || byPass) {
         href = `${to}`;
     }
 
@@ -37,8 +38,8 @@ const Link = ({ to, language, children, className, hrefLang, itemProp, rel, styl
             to={href}
             itemProp={itemProp}
             style={{ ...style }}
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...extra}
+            {...others}
         >
             {children}
         </GatsbyLink>

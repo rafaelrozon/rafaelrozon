@@ -44,7 +44,7 @@ const Bio = () => {
                 `}
                 layout="fixed"
                 formats={['AUTO', 'WEBP', 'AVIF']}
-                src="../../images/rafa_profile.png"
+                src="../../images/profile.png"
                 width={50}
                 height={50}
                 quality={95}

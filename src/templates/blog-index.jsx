@@ -25,7 +25,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
             <Layout location={location} title={siteTitle}>
                 <Seo title="All posts" />
                 <Bio />
-                <p>{t("noPostsFound")}</p>
+                <p>{t('noPostsFound')}</p>
             </Layout>
         );
     }
@@ -104,11 +104,11 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     }
                 `}
             >
-                <Link to={social.twitter}>twitter</Link>
+                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://twitter.com/${social.twitter}`}>Twitter</Link>
                 {`·`}
-                <Link to={social.github}>GitHub</Link>
+                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://github.com/${social.github}`}>GitHub</Link>
                 {`·`}
-                <Link to={social.linkedin}>LinkedIn</Link>
+                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://www.linkedin.com/in/${social.linkedin}`}>LinkedIn</Link>
             </footer>
         </Layout>
     );

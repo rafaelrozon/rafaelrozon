@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
     siteMetadata: {
-        title: `TheCodeFront`,
+        title: `Rafael Rozon`,
         siteUrl: `https://thecodefront.com`,
         social: {
             twitter: `rafaelrozon`,
@@ -69,12 +69,12 @@ module.exports = {
         },
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
-        // {
-        //   resolve: `gatsby-plugin-google-analytics`,
-        //   options: {
-        //     trackingId: `ADD YOUR TRACKING ID HERE`,
-        //   },
-        // },
+        {
+          resolve: `gatsby-plugin-google-analytics`,
+          options: {
+            trackingId: `G-KB3JGF9JDZ`,
+          },
+        },
         {
             resolve: `gatsby-plugin-feed`,
             options: {
