@@ -22,7 +22,6 @@
 // import { css, jsx, useTheme, ThemeProvider } from '@emotion/react';
 // import { useStaticQuery, graphql } from 'gatsby';
 
-
 // import Bio from "./Bio";
 // // useTheme.mockImplementation(() => theme);
 

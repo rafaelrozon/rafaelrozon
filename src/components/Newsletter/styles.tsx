@@ -37,7 +37,6 @@ export const InputErrorMessage = styled.span`
     font-weight: bold;
 `;
 
-
 // Layout
 export const Row = styled.div`
     margin-bottom: 0.8em;

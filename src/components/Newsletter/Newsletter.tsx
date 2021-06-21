@@ -7,9 +7,10 @@ import { css, jsx, useTheme } from '@emotion/react';
 
 import useSignup from '../../hooks/useSignupUse';
 import { rh } from '../../utils/typography';
+// TODO fix types for styles
 import { Input, Row, Col, Button, Message, InputErrorMessage } from './styles';
 
-const Newsletter = () => {
+const Newsletter = (): React.ReactElement => {
     const theme = useTheme();
 
     const { t } = useTranslation();
@@ -101,42 +102,38 @@ const Newsletter = () => {
                     <Row>
                         <div>
                             <Col>
-                                <label>
-                                    {t('firstName')}
-                                    <Input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.firstName}
-                                        id="firstName"
-                                        data-testid="firstName"
-                                        type="text"
-                                        name="firstName"
-                                        placeholder={t('firstNamePlaceholder')}
-                                    />
-                                </label>
+                                <label htmlFor="firstName">{t('firstName')}</label>
+                                <Input
+                                    onChange={formik.handleChange}
+                                    value={formik.values.firstName}
+                                    id="firstName"
+                                    data-testid="firstName"
+                                    type="text"
+                                    name="firstName"
+                                    placeholder={t('firstNamePlaceholder')}
+                                />
                                 {formik.errors.firstName && (
                                     <InputErrorMessage>{formik.errors.firstName}</InputErrorMessage>
                                 )}
                             </Col>
                             <Col>
-                                <label>
-                                    {t('email')}
-                                    <Input
-                                        onChange={formik.handleChange}
-                                        value={formik.values.email}
-                                        id="email"
-                                        data-testid="email"
-                                        type="email"
-                                        name="email"
-                                        placeholder={t('emailPlaceholder')}
-                                    />
-                                </label>
+                                <label htmlFor="email">{t('email')}</label>
+                                <Input
+                                    onChange={formik.handleChange}
+                                    value={formik.values.email}
+                                    id="email"
+                                    data-testid="email"
+                                    type="email"
+                                    name="email"
+                                    placeholder={t('emailPlaceholder')}
+                                />
                                 {formik.errors.email && <InputErrorMessage>{formik.errors.email}</InputErrorMessage>}
                             </Col>
                         </div>
                     </Row>
                     <Row>
                         <Col>
-                            <Button data-testid="submit" type="submit" value={t("subscribe")} />
+                            <Button data-testid="submit" type="submit" value={t('subscribe')} />
                         </Col>
                     </Row>
                 </form>

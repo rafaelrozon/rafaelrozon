@@ -6,8 +6,8 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 exports.createPages = async ({ graphql, actions, reporter }) => {
     const { createPage } = actions;
 
-    const blogPost = path.resolve(`./src/templates/blog-post.jsx`);
-    const blogIndex = path.resolve('./src/templates/blog-index.jsx');
+    const blogPost = path.resolve(`./src/templates/blog-post.tsx`);
+    const blogIndex = path.resolve('./src/templates/blog-index.tsx');
 
     const getTranslations = postData => {
         return Object.values(postData).map(trans => {

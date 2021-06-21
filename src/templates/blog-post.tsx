@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { graphql } from 'gatsby';
-import { useTranslation } from 'react-i18next';
 /** @jsx jsx */
 import { jsx, useTheme, css } from '@emotion/react';
+import { graphql } from 'gatsby';
+import { useTranslation } from 'react-i18next';
 
 import { rh } from '../utils/typography';
 import Bio from '../components/Bio';
 import Link from '../components/Link';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
-import {Newsletter} from '../components/Newsletter';
+import { Newsletter } from '../components/Newsletter';
 import formatDateInPT from '../utils/formatDateInPt';
+import { Site, Translation } from '../types';
+import { PageContextValues } from '../context/PageContext';
 
-const getDiscussUrl = (translations, defaultLang, host) => {
+const getDiscussUrl = (translations: Translation[], defaultLang: string, host: string): string => {
     const defaultTranslation = translations.find(trans => trans.lang === defaultLang);
     if (!defaultTranslation) {
         return '';
@@ -22,12 +24,51 @@ const getDiscussUrl = (translations, defaultLang, host) => {
     return `https://mobile.twitter.com/search?q=${search}`;
 };
 
-const getEditUrl = ({ githubUsername, githubRepository, pathFolder, lang, defaultLang }) => {
+const getEditUrl = ({
+    githubUsername,
+    githubRepository,
+    pathFolder,
+    lang,
+    defaultLang
+}: {
+    githubUsername: string;
+    githubRepository: string;
+    pathFolder: string;
+    lang: string;
+    defaultLang: string;
+}): string => {
     const file = `index${lang === defaultLang ? '' : `.${lang}`}.md`;
     return `https://github.com/${githubUsername}/${githubRepository}/edit/master/${pathFolder}/${file}`;
 };
 
-const BlogPostTemplate = ({ data, location, pageContext }) => {
+interface BlogPostTemplateProps {
+    location: Location;
+    pageContext: PageContextValues;
+    data: {
+        markdownRemark: {
+            fields: {
+                directoryName: string;
+            };
+            frontmatter: {
+                lang: string;
+                title: string;
+                path: string;
+                date: string;
+                description?: string;
+            };
+            excerpt?: string;
+            html: string;
+        };
+        previous: {
+            frontmatter: { path: string; title: string };
+        };
+        next: {
+            frontmatter: { path: string; title: string };
+        };
+        site: Site;
+    };
+}
+const BlogPostTemplate = ({ data, location, pageContext }: BlogPostTemplateProps): React.ReactElement => {
     const theme = useTheme();
     const post = data.markdownRemark;
 
@@ -111,6 +152,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
                     css={css`
                         margin-bottom: ${rh(2)};
                     `}
+                    // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{ __html: post.html }}
                     itemProp="articleBody"
                 />
@@ -152,7 +194,9 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
                         color: ${theme.colors.secondary};
                     `}
                 >
-                    <Link noDecoration language={lang} to={`/${lang}`}>{t('blogTitle')}</Link>
+                    <Link noDecoration language={lang} to={`/${lang}`}>
+                        {t('blogTitle')}
+                    </Link>
                 </h3>
                 <Bio />
             </aside>

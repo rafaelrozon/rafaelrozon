@@ -1,5 +1,5 @@
 require('dotenv').config({
-    path: `.env.${process.env.NODE_ENV}`,
+    path: `.env.${process.env.NODE_ENV}`
 });
 
 module.exports = {
@@ -10,7 +10,6 @@ module.exports = {
             twitter: `rafaelrozon`,
             github: `rafaelrozon`,
             linkedin: `rafaelrozon`
-
         },
         contentFolderPath: 'content/blog',
         githubUsername: 'rafaelrozon',
@@ -70,10 +69,10 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         {
-          resolve: `gatsby-plugin-google-analytics`,
-          options: {
-            trackingId: `G-KB3JGF9JDZ`,
-          },
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                trackingId: `G-KB3JGF9JDZ`
+            }
         },
         {
             resolve: `gatsby-plugin-feed`,
@@ -141,21 +140,29 @@ module.exports = {
         },
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-gatsby-cloud`,
+        {
+            resolve: `gatsby-plugin-typescript`,
+            options: {
+                isTSX: true, // defaults to false
+                jsxPragma: `jsx`, // defaults to "React"
+                allExtensions: true // defaults to false
+            }
+        },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,
         {
             resolve: `gatsby-plugin-typography`,
             options: {
-              pathToConfigModule: `src/utils/typography`,
-            },
+                pathToConfigModule: `src/utils/typography`
+            }
         },
         `gatsby-plugin-emotion`,
         {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
-                endpoint: process.env.MAILCHIMP_ENDPOINT,
-            },
-        },
+                endpoint: process.env.MAILCHIMP_ENDPOINT
+            }
+        }
     ]
 };

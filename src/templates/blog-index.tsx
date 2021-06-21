@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 import * as React from 'react';
 import { graphql } from 'gatsby';
 import { useTranslation } from 'react-i18next';
@@ -10,8 +11,29 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import { rh } from '../utils/typography';
 import formatDateInPT from '../utils/formatDateInPt';
+import { PageContextValues } from '../context/PageContext';
+import { Post } from '../types';
 
-const BlogIndex = ({ data, location, pageContext }) => {
+interface BlogIndexProps {
+    data: {
+        allMarkdownRemark: {
+            nodes: Post[];
+        };
+        site: {
+            siteMetadata: {
+                social: {
+                    twitter: string;
+                    github: string;
+                    linkedin: string;
+                };
+            };
+        };
+    };
+    location: Location;
+    pageContext: PageContextValues;
+}
+
+const BlogIndex = ({ data, location, pageContext }: BlogIndexProps): React.ReactElement => {
     const { t } = useTranslation();
     const theme = useTheme();
     const { lang } = pageContext;
@@ -44,6 +66,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
             >
                 {postsInLocale.map(post => {
                     const title = post.frontmatter.title || post.fields.slug;
+                    const description = post.frontmatter.description || post.excerpt;
 
                     return (
                         <li key={post.frontmatter.path}>
@@ -78,13 +101,15 @@ const BlogIndex = ({ data, location, pageContext }) => {
                                         margin: 0 0 ${rh(1)} 0;
                                     `}
                                 >
-                                    <p
-                                        // eslint-disable-next-line react/no-danger
-                                        dangerouslySetInnerHTML={{
-                                            __html: post.frontmatter.description || post.excerpt
-                                        }}
-                                        itemProp="description"
-                                    />
+                                    {description && (
+                                        <p
+                                            // eslint-disable-next-line react/no-danger
+                                            dangerouslySetInnerHTML={{
+                                                __html: description
+                                            }}
+                                            itemProp="description"
+                                        />
+                                    )}
                                 </section>
                             </article>
                         </li>
@@ -104,11 +129,22 @@ const BlogIndex = ({ data, location, pageContext }) => {
                     }
                 `}
             >
-                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://twitter.com/${social.twitter}`}>Twitter</Link>
+                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://twitter.com/${social.twitter}`}>
+                    Twitter
+                </Link>
                 {`·`}
-                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://github.com/${social.github}`}>GitHub</Link>
+                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://github.com/${social.github}`}>
+                    GitHub
+                </Link>
                 {`·`}
-                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://www.linkedin.com/in/${social.linkedin}`}>LinkedIn</Link>
+                <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    byPass
+                    to={`https://www.linkedin.com/in/${social.linkedin}`}
+                >
+                    LinkedIn
+                </Link>
             </footer>
         </Layout>
     );
