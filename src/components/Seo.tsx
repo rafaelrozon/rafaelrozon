@@ -5,7 +5,16 @@ import { useTranslation } from 'react-i18next';
 
 import { usePageContext } from '../context/PageContext';
 
-const SEO = ({ description, meta = [], title }) => {
+interface MetaData {
+    [key: string]: string;
+}
+
+interface SEOProps {
+    description?: string;
+    meta?: MetaData[];
+    title: string;
+}
+const SEO = ({ description = '', meta = [], title }: SEOProps): React.ReactElement => {
     const { t } = useTranslation();
 
     const { lang, translations = [], pagePath } = usePageContext();
@@ -35,8 +44,8 @@ const SEO = ({ description, meta = [], title }) => {
                 lang
             }}
             title={title}
-            titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-            meta={[
+            titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
+            meta={([
                 {
                     name: `description`,
                     content: description
@@ -73,7 +82,7 @@ const SEO = ({ description, meta = [], title }) => {
                     property: `og:locale`,
                     content: lang
                 }
-            ].concat(meta)}
+            ] as MetaData[]).concat(meta)}
         >
             <link rel="canonical" href={pageUrl} />
             <link rel="alternate" hrefLang="x-default" href={pageUrl} />

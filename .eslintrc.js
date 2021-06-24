@@ -1,43 +1,34 @@
 module.exports = {
+    root: true,
     env: {
-        jest: true
+        jest: true,
+        browser: true,
+        node: true
     },
     extends: [
-        'airbnb',
-        // 'plugin:@typescript-eslint/recommended',
-        'plugin:import/errors',
-        'plugin:import/warnings',
-        // 'plugin:import/typescript',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
         'prettier'
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
-            jsx: true,
-            modules: true
-        },
-        ecmaVersion: 2018,
-        sourceType: 'module'
+            jsx: true
+            // modules: true
+        }
     },
-    plugins: ['@typescript-eslint', 'react'],
+    plugins: ['@typescript-eslint', '@emotion', 'react'],
     rules: {
-        'import/no-extraneous-dependencies': [
-            'off',
-            {
-                devDependencies: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.spec.js']
-            }
-        ],
-        'import/prefer-default-export': 'off',
-        'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx', '.stories.tsx'] }],
-        'class-methods-use-this': 'off',
-        "arrow-body-style": "off",
-        "import/extensions": "off"
+        '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'jsx' }]
     },
     overrides: [
         {
-            files: ['babel.config.js', 'jest.config.js', 'webpack.**.js', '.prettier.js'],
-            rules: {
-                '@typescript-eslint/no-var-requires': 'off'
+            files: ['*.ts', '*.tsx'], // Your TypeScript files extension
+            parserOptions: {
+                project: ['./tsconfig.json'] // Specify it only for TypeScript files
             }
         }
     ]

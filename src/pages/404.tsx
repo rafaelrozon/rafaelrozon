@@ -4,7 +4,11 @@ import { useTranslation } from 'react-i18next';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 
-const NotFoundPage = ({ location }) => {
+interface NotFoundPageProps {
+    location: Location;
+}
+
+const NotFoundPage = ({ location }: NotFoundPageProps): React.ReactElement => {
     const { t } = useTranslation();
     return (
         <Layout location={location} title={t('blogTitle')}>

@@ -10,26 +10,26 @@ I have written and seen code like this in React apps:
 
 ```jsx
 function App() {
-  return (
-    <AuthProvider>
-      <ReduxProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <IntlProvider locale={locale}>
-            <Router>
-              <Switch>
-                <Route path="/about">
-                    <About />
-                </Route>
-                <Route path="/">
-                    <Home />
-                </Route>
-              </Switch>
-            </Router>
-          </IntlProvider>
-        </ThemeProvider>
-      </ReduxProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <ReduxProvider store={store}>
+                <ThemeProvider theme={theme}>
+                    <IntlProvider locale={locale}>
+                        <Router>
+                            <Switch>
+                                <Route path="/about">
+                                    <About />
+                                </Route>
+                                <Route path="/">
+                                    <Home />
+                                </Route>
+                            </Switch>
+                        </Router>
+                    </IntlProvider>
+                </ThemeProvider>
+            </ReduxProvider>
+        </AuthProvider>
+    );
 }
 ```
 
@@ -42,40 +42,37 @@ Since almost everything in React is a component, let's make a new one to central
 ```jsx
 // file: AppProvider.tsx
 const AppProvider = ({ children, store, theme, locale }) => {
-  return (
-    <AuthProvider>
-      <ReduxProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <IntlProvider locale={locale}>
-            {children}
-          </IntlProvider>
-        </ThemeProvider>
-      </ReduxProvider>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <ReduxProvider store={store}>
+                <ThemeProvider theme={theme}>
+                    <IntlProvider locale={locale}>{children}</IntlProvider>
+                </ThemeProvider>
+            </ReduxProvider>
+        </AuthProvider>
+    );
 };
 
 export default AppProvider;
-
 
 // file: App.tsx
 import AppProvider from './AppProvider';
 
 function App() {
-  return (
-    <AppProvider store={store} theme={theme} locale={locale}>
-      <Router>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </AppProvider>
-  );
+    return (
+        <AppProvider store={store} theme={theme} locale={locale}>
+            <Router>
+                <Switch>
+                    <Route path="/about">
+                        <About />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </Router>
+        </AppProvider>
+    );
 }
 ```
 
@@ -84,23 +81,22 @@ The AppProvider component centralizes all global providers of the app and takes 
 ```jsx
 // file: SomeComponent.stories.js
 export default {
-  component: SomeComponent,
-  decorators: [
-    (Story) => (
-      <AppProvider store={store} theme={theme} locale={locale}>
-        <Story />
-      </AppProvider>
-    ),
-  ],
+    component: SomeComponent,
+    decorators: [
+        Story => (
+            <AppProvider store={store} theme={theme} locale={locale}>
+                <Story />
+            </AppProvider>
+        )
+    ]
 };
-
 ```
 
 The advantages of this approach are:
 
-- Single source of truth for providers. If they need to be modified, the change is done in one place. It also helps with maintainability.
-- Reusability
-- It is easier to read. When we go through the App file, we focus on what's important. When we see the AppProvider component, we get that it gives the app some shared state and capabilities. If we need to dig further, it's just to open that file and focus only on the providers. In my experience, minor readability optimizations like this help to avoid unnecessary mental gymnastics when reading code. Most likely, the code base will grow, and readability and simplicity will be of great importance for maintenance.
+-   Single source of truth for providers. If they need to be modified, the change is done in one place. It also helps with maintainability.
+-   Reusability
+-   It is easier to read. When we go through the App file, we focus on what's important. When we see the AppProvider component, we get that it gives the app some shared state and capabilities. If we need to dig further, it's just to open that file and focus only on the providers. In my experience, minor readability optimizations like this help to avoid unnecessary mental gymnastics when reading code. Most likely, the code base will grow, and readability and simplicity will be of great importance for maintenance.
 
 ## Caveats
 

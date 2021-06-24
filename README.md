@@ -16,17 +16,17 @@ I write about software development and career on [rafaelrozon.com](https://www.r
 
 ## TO DO
 
--   [X] Update README with instructions
+-   [x] Update README with instructions
 -   [ ] Add unit tests
 -   [ ] Update Github settings
 -   [ ] add analytics
--   [X] update license
--   [X] fix photo
--   [X] review texts
+-   [x] update license
+-   [x] fix photo
+-   [x] review texts
 -   [ ] tests?
--   [ ] convert to typescript
+-   [x] convert to typescript
 -   [ ] favicon
 -   [ ] create banner
 -   [ ] create banner for code snippets with my name on it
--   [X] update package.json
--   [X] lint staged
+-   [x] update package.json
+-   [x] lint staged

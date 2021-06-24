@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 /** @jsx jsx */
 import { css, jsx, useTheme } from '@emotion/react';
 
-import {rh} from '../../utils/typography';
+import { rh } from '../../utils/typography';
 
-const Bio = () => {
+const Bio = (): React.ReactElement => {
     const theme = useTheme();
     const data = useStaticQuery(graphql`
         query BioQuery {
@@ -51,21 +51,21 @@ const Bio = () => {
                 alt="Profile picture"
             />
 
-                <p
-                    css={css`
-                        margin: 0;
-                        a {
-                            color: ${theme.colors.secondary};
-                        }
-                    `}
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{
-                        __html: t('footer', {
-                            author: `<a href="https://twitter.com/${twitter}">${t('author')}</a>`,
-                            authorSummary: t('authorSummary')
-                        })
-                    }}
-                />
+            <p
+                css={css`
+                    margin: 0;
+                    a {
+                        color: ${theme.colors.secondary};
+                    }
+                `}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                    __html: t('footer', {
+                        author: `<a href="https://twitter.com/${twitter}">${t('author')}</a>`,
+                        authorSummary: t('authorSummary')
+                    })
+                }}
+            />
         </div>
     );
 };

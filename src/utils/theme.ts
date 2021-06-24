@@ -1,4 +1,3 @@
-import {rh} from './typography'
 /**
  *
  *  light green: #60E280
@@ -38,42 +37,33 @@ import {rh} from './typography'
  * !!! https://coolors.co/3d5a80-98c1d9-e0fbfc-ee6c4d-293241
  * https://coolors.co/003049-d62828-f77f00-fcbf49-eae2b7
  */
-const theme =  {
+
+import { Theme } from '../types';
+
+const theme: Theme = {
     colors: {
-        blue: [
-            '#e0fbfc',
-            '#98c1d9',
-            '#3d5a80'
-        ],
-        gray: [
-            '#e5e5e5',
-            '#f5f5f5',
-            '#708090'
-        ],
+        blue: ['#e0fbfc', '#98c1d9', '#3d5a80'],
+        gray: ['#e5e5e5', '#f5f5f5', '#708090'],
         primary: '#293241',
         secondary: '#d62828',
         background: 'white',
         white: '#fff'
     },
     space: [
-        0,
-        "0.146rem", // 2px
-        "0.236rem", // 4px
-        "0.618rem", // 11px
-        "1rem",     // 18px
-        "1.618rem", // 29px
-        "2.618rem", // 47px
-        "4.236rem", // 76px
-        "6.854rem", // 123px
-        "11.089rem" // 199px
+        '0',
+        '0.146rem', // 2px
+        '0.236rem', // 4px
+        '0.618rem', // 11px
+        '1rem', // 18px
+        '1.618rem', // 29px
+        '2.618rem', // 47px
+        '4.236rem', // 76px
+        '6.854rem', // 123px
+        '11.089rem' // 199px
     ],
     border: {
         radius: '12px'
     }
-}
-
-theme.space.sm = theme.space[2];
-theme.space.md = theme.space[3];
-theme.space.lg = theme.space[4];
+};
 
 export default theme;

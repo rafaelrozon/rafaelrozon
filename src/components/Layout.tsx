@@ -9,7 +9,12 @@ import { usePageContext } from '../context/PageContext';
 import LanguageSelector from './LanguageSelector';
 import { rh } from '../utils/typography';
 
-const Layout = ({ location, children }) => {
+interface LayoutProps {
+    location: Location;
+    title: string;
+}
+
+const Layout: React.FC<LayoutProps> = ({ location, children, title }) => {
     const { lang, supportedLanguages = [] } = usePageContext();
     const { t } = useTranslation();
     const theme = useTheme();
@@ -37,7 +42,7 @@ const Layout = ({ location, children }) => {
                     `}
                     to={rootPath}
                 >
-                    {t('blogTitle')}
+                    {title}
                 </Link>
             </h1>
         );

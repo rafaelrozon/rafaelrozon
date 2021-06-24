@@ -1,30 +1,29 @@
-import React from 'react';
 /** @jsx jsx */
 import { jsx, css, useTheme } from '@emotion/react';
+import * as React from 'react';
 
 import Link from './Link';
 import { usePageContext } from '../context/PageContext';
 
-const LanguageSelector = () => {
+const LanguageSelector = (): React.ReactElement => {
     const theme = useTheme();
     const { lang, supportedLanguages = [] } = usePageContext();
-
     return (
         <div>
-            {supportedLanguages.map(code => (
+            {supportedLanguages.map(langCode => (
                 <Link
-                    noDecoration
-                    css={css`
+                    styles={css`
                         margin-right: 0.5em;
                         text-transform: uppercase;
                         color: ${theme.colors.primary};
-                        border-bottom: ${lang === code ? `2px solid ${theme.colors.primary}` : 'none'};
+                        border-bottom: ${lang === langCode ? `2px solid ${theme.colors.primary}` : 'none'};
+                        box-shadow: none;
                     `}
-                    key={code}
-                    language={code}
-                    to={`/${code}`}
+                    key={langCode}
+                    language={langCode}
+                    to={`/${langCode}`}
                 >
-                    {code}
+                    {langCode}
                 </Link>
             ))}
         </div>

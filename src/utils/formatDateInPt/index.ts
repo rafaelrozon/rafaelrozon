@@ -1,4 +1,4 @@
-const formatDateInPT = dateStr => {
+const formatDateInPT = (dateStr: string): string => {
     // 1 de maio de 2015
     const parts = dateStr.split(' ');
     const month = parts[2];
