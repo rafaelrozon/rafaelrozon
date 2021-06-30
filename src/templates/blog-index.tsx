@@ -5,14 +5,18 @@ import { useTranslation } from 'react-i18next';
 /** @jsx jsx */
 import { jsx, css, useTheme } from '@emotion/react';
 
+import { rh } from '../utils/typography';
+import { mq } from '../utils/theme';
+import { PageContextValues } from '../context/PageContext';
+import { Post } from '../types';
 import Link from '../components/Link';
 import Bio from '../components/Bio';
 import Layout from '../components/Layout';
 import Seo from '../components/Seo';
-import { rh } from '../utils/typography';
-import formatDateInPT from '../utils/formatDateInPt';
-import { PageContextValues } from '../context/PageContext';
-import { Post } from '../types';
+import Bookmark from '../components/Bookmark';
+import PostMetadata from '../components/PostMetadata';
+import CopyLink from '../components/CopyLink';
+import Footer from '../components/Footer';
 
 interface BlogIndexProps {
     data: {
@@ -34,17 +38,21 @@ interface BlogIndexProps {
 }
 
 const BlogIndex = ({ data, location, pageContext }: BlogIndexProps): React.ReactElement => {
+    console.log('location: ', location);
     const { t } = useTranslation();
     const theme = useTheme();
     const { lang } = pageContext;
     const siteTitle = t('blogTitle');
     const posts = data.allMarkdownRemark.nodes;
-    const { social } = data.site.siteMetadata;
     const postsInLocale = posts.filter(post => post.frontmatter.lang === lang);
+    const translations = [
+        { lang: 'en', link: '/en' },
+        { lang: 'pt', link: '/pt' }
+    ];
 
     if (postsInLocale.length === 0) {
         return (
-            <Layout location={location} title={siteTitle}>
+            <Layout location={location} title={siteTitle} translations={translations}>
                 <Seo title="All posts" />
                 <Bio />
                 <p>{t('noPostsFound')}</p>
@@ -53,16 +61,13 @@ const BlogIndex = ({ data, location, pageContext }: BlogIndexProps): React.React
     }
 
     return (
-        <Layout location={location} title={siteTitle}>
+        <Layout location={location} title={siteTitle} translations={translations}>
             <Seo title={t('indexPageTitle')} />
-
-            <Bio />
-
             <ol
-                css={css`
-                    list-style: none;
-                    margin: ${rh(2)} 0;
-                `}
+                css={mq({
+                    listStyle: 'none',
+                    margin: [`${rh(1)} ${rh(2 / 3)}`, `0 0 ${rh(4)}`]
+                })}
             >
                 {postsInLocale.map(post => {
                     const title = post.frontmatter.title || post.fields.slug;
@@ -71,87 +76,118 @@ const BlogIndex = ({ data, location, pageContext }: BlogIndexProps): React.React
                     return (
                         <li key={post.frontmatter.path}>
                             <article
-                                css={css`
-                                    margin: ${rh(2)} 0;
-                                `}
+                                css={mq({
+                                    margin: [`${rh(2)} 0 ${rh(3)}`, `${rh(2)} 0 ${rh(4)}`]
+                                })}
                                 itemScope
                                 itemType="http://schema.org/Article"
                             >
-                                <header>
-                                    <h2
+                                <header
+                                    css={mq({
+                                        margin: `0 auto`,
+                                        maxWidth: [rh(26), rh(24)]
+                                    })}
+                                >
+                                    <img
+                                        css={mq({
+                                            maxHeight: '480px',
+                                            margin: '0 auto',
+                                            display: 'block',
+                                            width: '100%'
+                                        })}
+                                        src={post.frontmatter.coverImg}
+                                        alt={post.frontmatter.coverImgAlt}
+                                    />
+                                </header>
+                                <div
+                                    css={mq({
+                                        margin: `0 auto`,
+                                        maxWidth: [rh(26), rh(21)]
+                                    })}
+                                >
+                                    <section
                                         css={css`
-                                            margin-bottom: ${rh(1 / 3)};
+                                            margin: 0 0 ${rh(1)};
                                         `}
                                     >
-                                        <Link
-                                            noDecoration
+                                        <h2
                                             css={css`
-                                                color: ${theme.colors.secondary};
+                                                margin: ${rh(1)} 0 ${rh(1 / 2)};
                                             `}
-                                            to={`/${post.frontmatter.path}`}
-                                            itemProp="url"
                                         >
-                                            <span itemProp="headline">{title}</span>
-                                        </Link>
-                                    </h2>
-                                    <small>{formatDateInPT(post.frontmatter.date)}</small>
-                                </header>
-                                <section
-                                    css={css`
-                                        margin: 0 0 ${rh(1)} 0;
-                                    `}
-                                >
-                                    {description && (
-                                        <p
-                                            // eslint-disable-next-line react/no-danger
-                                            dangerouslySetInnerHTML={{
-                                                __html: description
-                                            }}
-                                            itemProp="description"
-                                        />
-                                    )}
-                                </section>
+                                            <Link
+                                                noDecoration
+                                                css={css`
+                                                    display: inline-block;
+                                                    color: ${theme.colors.secondary};
+                                                `}
+                                                to={`/${post.frontmatter.path}`}
+                                                itemProp="url"
+                                            >
+                                                <span itemProp="headline">{title}</span>
+                                            </Link>
+                                        </h2>
+                                        {description && (
+                                            <p
+                                                // eslint-disable-next-line react/no-danger
+                                                dangerouslySetInnerHTML={{
+                                                    __html: description
+                                                }}
+                                                itemProp="description"
+                                            />
+                                        )}
+                                    </section>
+                                    <hr
+                                        css={css`
+                                            margin: 0;
+                                            max-width: ${rh(30)};
+                                        `}
+                                    />
+                                    <section
+                                        css={css`
+                                            display: flex;
+                                            justify-content: space-between;
+                                            max-width: ${rh(30)};
+                                            align-items: center;
+                                        `}
+                                    >
+                                        <PostMetadata date={post.frontmatter.date} timeToRead={post.timeToRead} />
+                                        <div
+                                            css={css`
+                                                display: flex;
+                                                align-items: center;
+
+                                                & > * {
+                                                    margin-left: ${rh(2 / 3)};
+                                                }
+                                            `}
+                                        >
+                                            <Bookmark
+                                                url={`https://rafaelrozon.com/${lang}/${post.frontmatter.path}`}
+                                            />
+                                            <CopyLink
+                                                styles={css`
+                                                    position: relative;
+                                                    top: -3px;
+                                                `}
+                                                text={`https://rafaelrozon.com/${lang}/${post.frontmatter.path}`}
+                                            />
+                                        </div>
+                                    </section>
+                                </div>
                             </article>
                         </li>
                     );
                 })}
             </ol>
-            <footer
-                css={css`
-                    a {
-                        margin: 0 ${theme.space[2]};
-                        color: ${theme.colors.secondary};
-                        text-transform: lowercase;
-                    }
-
-                    a:first-of-type {
-                        margin-left: 0;
-                    }
-                `}
-            >
-                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://twitter.com/${social.twitter}`}>
-                    Twitter
-                </Link>
-                {`·`}
-                <Link target="_blank" rel="noopener noreferrer" byPass to={`https://github.com/${social.github}`}>
-                    GitHub
-                </Link>
-                {`·`}
-                <Link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    byPass
-                    to={`https://www.linkedin.com/in/${social.linkedin}`}
-                >
-                    LinkedIn
-                </Link>
-            </footer>
+            <Footer />
         </Layout>
     );
 };
 
 export default BlogIndex;
 
+// TODO: check which fields are still in use from site query
 export const pageQuery = graphql`
     query($lang: String!, $dateFormatString: String!) {
         site {
@@ -173,12 +209,15 @@ export const pageQuery = graphql`
                 fields {
                     slug
                 }
+                timeToRead
                 frontmatter {
                     date(formatString: $dateFormatString, locale: $lang)
                     title
                     description
                     lang
                     path
+                    coverImg
+                    coverImgAlt
                 }
             }
         }

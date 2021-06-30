@@ -6,7 +6,7 @@ const typography = new Typography({
     baseFontSize: '18px',
     overrideStyles: () => ({
         a: {
-            color: '#d62828', // TODO: move this to contstant
+            color: '#141649', // TODO: move this to contstant
             boxShadow: '0 1px 0 0 currentColor',
             textDecoration: 'none',
             backgroundColor: 'transparent'

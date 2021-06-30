@@ -19,10 +19,7 @@ const PageContext = React.createContext<PageContextValues>({
 });
 
 interface PageContextProviderProps {
-    value: {
-        lang: string;
-    };
-    // children: React.ReactElement;
+    value: PageContextValues;
 }
 
 export const PageContextProvider: React.FC<PageContextProviderProps> = ({ children, value }) => {

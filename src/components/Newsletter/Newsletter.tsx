@@ -1,4 +1,3 @@
-import * as React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -7,10 +6,16 @@ import { css, jsx, useTheme } from '@emotion/react';
 
 import useSignup from '../../hooks/useSignupUse';
 import { rh } from '../../utils/typography';
+import { mq } from '../../utils/theme';
 // TODO fix types for styles
 import { Input, Row, Col, Button, Message, InputErrorMessage } from './styles';
 
-const Newsletter = (): React.ReactElement => {
+interface NewsletterProps {
+    // TODO: fix typing
+    styles?: any;
+}
+
+const Newsletter = ({ styles = {} }: NewsletterProps): React.ReactElement => {
     const theme = useTheme();
 
     const { t } = useTranslation();
@@ -35,6 +40,7 @@ const Newsletter = (): React.ReactElement => {
         validationSchema: SignupSchema
     });
 
+    // TODO: create enum for the result value
     const newsletterError = result && result.result === 'error';
     const newsletterSuccess = result && result.result === 'success';
     const msg = result && result.msg;
@@ -42,32 +48,22 @@ const Newsletter = (): React.ReactElement => {
     return (
         <div
             data-testid="newsletter"
-            css={css`
-                border-radius: ${theme.border.radius};
-                padding: ${theme.space[3]};
-                box-shadow: 0 2px 15px 0 rgba(210, 214, 220, 0.5);
-
-                @media (min-width: 600px) {
-                    padding: ${theme.space[6]};
-                }
-            `}
+            css={mq(styles, {
+                bordeRadius: `${theme.border.radius}`,
+                padding: [`${theme.space[5]} ${theme.space[4]}`, theme.space[5]],
+                boxShadow: `0 2px 15px 0 rgba(210, 214, 220, 0.5)`
+            })}
         >
             <div
-                css={css`
-                    display: block;
-                    margin-bottom: ${rh(1)};
-
-                    @media (min-width: 600px) {
-                        display: flex;
-                    }
-                `}
+                css={mq({
+                    marginBottom: rh(1),
+                    display: ['block', 'flex']
+                })}
             >
                 <div
-                    css={css`
-                        @media (min-width: 600px) {
-                            padding-right: ${theme.space[3]};
-                        }
-                    `}
+                    css={mq({
+                        width: ['100%', '50%']
+                    })}
                 >
                     <h2
                         css={css`
@@ -80,13 +76,9 @@ const Newsletter = (): React.ReactElement => {
                     <p>
                         {t('newsletterCtaFirst')}
                         <span
-                            css={css`
-                                display: inline-block;
-
-                                @media (min-width: 600px) {
-                                    display: table;
-                                }
-                            `}
+                            css={mq({
+                                display: ['inline-block', 'table']
+                            })}
                         >
                             {t('newsletterCtaSecond')}
                         </span>
@@ -94,9 +86,9 @@ const Newsletter = (): React.ReactElement => {
                 </div>
 
                 <form
-                    css={css`
-                        margin: 0;
-                    `}
+                    css={mq({
+                        margin: 0
+                    })}
                     onSubmit={formik.handleSubmit}
                 >
                     <Row>
@@ -141,7 +133,7 @@ const Newsletter = (): React.ReactElement => {
             <div>
                 {error && error.msg && <Message data-testid="generic-error">{error.msg}</Message>}
                 {newsletterError && (
-                    <Message data-testid="newsletter-error" dangerouslySetInnerHTML={{ __html: msg }} />
+                    <Message data-testid="newsletter-error" dangerouslySetInnerHTML={{ __html: msg || '' }} />
                 )}
                 {newsletterSuccess && (
                     <Message data-testid="newsletter-success" type="success">

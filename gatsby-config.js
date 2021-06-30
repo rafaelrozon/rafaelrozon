@@ -163,6 +163,7 @@ module.exports = {
             options: {
                 endpoint: process.env.MAILCHIMP_ENDPOINT
             }
-        }
+        },
+
     ]
 };
