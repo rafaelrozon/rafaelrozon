@@ -1,3 +1,8 @@
+export enum Lang {
+    EN = 'en',
+    PT = 'pt'
+}
+
 export interface Translation {
     lang: string;
     link: string;
@@ -10,10 +15,15 @@ export interface Post {
         path: string;
         date: string;
         description?: string;
+        coverImg: string;
+        coverImgAlt: string;
     };
+    timeToRead: string;
     excerpt?: string;
+    html: string;
     fields: {
         slug: string;
+        directoryName: string;
     };
 }
 
@@ -41,6 +51,10 @@ export interface Theme {
         secondary: string;
         background: string;
         white: string;
+        pink: string;
+        mustard: string;
+        lightGray: string;
+        green: string;
     };
     space: string[];
     border: {

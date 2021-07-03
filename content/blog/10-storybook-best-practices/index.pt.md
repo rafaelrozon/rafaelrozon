@@ -1,9 +1,12 @@
 ---
-title: 10 Storybook Best Practices
+title: 10 Boas Práticas de Storybook
 date: '2015-05-01T22:12:03.284Z'
 description: 'Aprenda como expandir e integrar Storybook no seu ciclo de desenvolvimento'
 lang: 'pt'
 path: '10-praticas-storybook'
+coverImg: 'https://res.cloudinary.com/rafael-rozon-developer/image/upload/v1625057616/storybook_swbsmw.png'
+coverImgAlt: 'Texto 10 Boas Práticas de Storybook'
+coverImgCredit: ''
 ---
 
 Este é um post sobre Storybok e convenções. Ele é baseado nas minhas experiências usando Storybook for muitos anos e a partir da experiência de outros desenvolvedores. As práticas que eu vou descrever aqui não são soluções prontas que vão concertar e melhorar todo e qualquer projeto. Elas são uma base de idéias e convenções que eu acredito valha a pena tentar. Espero, de verdade, que elas possam ajudar você e seu time a ter uma experiência de desenvolvimento melhor e que isso ajude a entregar software melhor às pessoas.
@@ -16,9 +19,9 @@ Eu vou usar o termo em Inglês "story" ao invés the história para evitar confu
 
 Cada arquivo de Storybook deve ter:
 
-- uma story Padrão (Default)
-- uma story chamada Playground
-- e outras storys, se necessário, que representem um estado específico do componente ou um uso específico de sua API (Application Programming Interface)
+-   uma story Padrão (Default)
+-   uma story chamada Playground
+-   e outras storys, se necessário, que representem um estado específico do componente ou um uso específico de sua API (Application Programming Interface)
 
 A story padrão mostra o componente com apenas as propriedades (props em React) obrigatórias. Isso ajuda a criar uma representação base para todos sobre a interface gráfica do componente e suas funções. Quando as pessoas pensarem sobre o componente, o ideal seria que elas associassem essa representação com o que a story padrão apresenta.
 A story playground é usada para ajudar outras pessoas a testarem combinações diferentes de configurações do componente e ver como ele responde. Isso pode ser implementado na 5a. versão utilizando o knobs add-on. Você cria knobs para todas a propriedades que o componente aceite:
@@ -47,9 +50,9 @@ const storiesOf("Button", module).
         const textDefaultValue = "Click me";
 
         return (
-            <Button 
-                type={select(typePropLabel, typePropOptions, typePropDefaultValue)} 
-                text={text(textPropLabel, textDefaultValue)} 
+            <Button
+                type={select(typePropLabel, typePropOptions, typePropDefaultValue)}
+                text={text(textPropLabel, textDefaultValue)}
             />
         )
     })
@@ -58,51 +61,51 @@ const storiesOf("Button", module).
 Para a última versão do Storybook, a story playground pode ser escrita usando o [novo recurso chamado Args](https://storybook.js.org/docs/react/writing-stories/args). E funciona assim:
 
 ```jsx
-import React from "react";
-import Button from ".";
+import React from 'react';
+import Button from '.';
 
 // Args Setup
-const Template = (args) => <Button {...args} />;
+const Template = args => <Button {...args} />;
 
 export const Playground = Template.bind({});
 
 const buttonTypes = {
-  SUBMIT: 'submit',
-  INPUT: 'input'
-}
+    SUBMIT: 'submit',
+    INPUT: 'input'
+};
 
 Playground.args = {
-  type: buttonTypes.INPUT,
-  text: "Primary",
+    type: buttonTypes.INPUT,
+    text: 'Primary'
 };
 
 Playground.argTypes = {
-  type: {
-    control: {
-      type: "select",
-      options: [buttonTypes.INPUT, buttonTypes.SUBMIT]
+    type: {
+        control: {
+            type: 'select',
+            options: [buttonTypes.INPUT, buttonTypes.SUBMIT]
+        }
+    },
+    text: {
+        control: 'text'
     }
-  },
-  text: {
-    control: "text"
-  }
-}
+};
 
 export const DefaultStory = () => <Button type="button" text="Click me" />;
 
-DefaultStory.storyName = "Default";
+DefaultStory.storyName = 'Default';
 
 export default {
-  title: "Components/Button",
-  component: DefaultStory,
+    title: 'Components/Button',
+    component: DefaultStory
 };
 ```
 
 Por fim, as outras storys devem representar um estado específico ou o uso de uma API do componente. Por exemplo, se você tiver um botão que tem uma propriedade chamada type e cujos valores possam ser: `primary`, `secondary` ou `error`. Então nós poderíamos ter as seguintes stories: `Button/Primary`, `Button/Secondary`, `Button/Tertiary`, and `Button/Error`. Os motivos para seguir esse padrão são:
 
-- É mais fácil compartilhar links de components que claramente representam um estado ou API. O que pode ser muito útil para outros membros do time como designers e QA.
-- Se o Storybook for usado com outras ferramentas de teste, como teste de snapshot ou teste de regressão visual (visual regression testing), cada story torna-se um test unitário (unit test). Se algum dos testes falhar, você vai saber qual e muito provavelmente o porquê exato da falha.
-- Ao escrever stories que claramente expõe o funcionamento e possívels estados do componente, é mais provavel que outros usuários, e nós mesmos no futuro, tenhamos um idéia clara do que o componente é capaz de fazer e assim evitamos que configuracões e APIs fiquem escondidas pela ferramenta.
+-   É mais fácil compartilhar links de components que claramente representam um estado ou API. O que pode ser muito útil para outros membros do time como designers e QA.
+-   Se o Storybook for usado com outras ferramentas de teste, como teste de snapshot ou teste de regressão visual (visual regression testing), cada story torna-se um test unitário (unit test). Se algum dos testes falhar, você vai saber qual e muito provavelmente o porquê exato da falha.
+-   Ao escrever stories que claramente expõe o funcionamento e possívels estados do componente, é mais provavel que outros usuários, e nós mesmos no futuro, tenhamos um idéia clara do que o componente é capaz de fazer e assim evitamos que configuracões e APIs fiquem escondidas pela ferramenta.
 
 ## 2. Co-locação: Arquivos Storybook devem estar junto com o component deles
 
@@ -129,14 +132,14 @@ Quando você usa Storybook você deve ter uma idéia clara sobre como seu applic
 Você vê como o menu no Storybook acima alinha com a estrutura de arquivos do applicativo?
 Organizar os stories assim vai ajudar você a:
 
-- Encontrar stories facilmente
-- Entender como o código está organizado sem mesmo precisar abrir o projeto
+-   Encontrar stories facilmente
+-   Entender como o código está organizado sem mesmo precisar abrir o projeto
 
 Se você aplica o conceito de co-location no seu applicativo (manter coisas relacionadas juntas) a estrutura de pastas e arquivos te ajuda a dar uma idéia de como o app está organizado. Mas que isso não seja confundido com arquitetura. Estrutura de pastas e arquivos não é arquitetura.
 
 ### 7. Ambiente Consistente
 
-Quando nós desenvolvemos em Storybook nós queremos desenvolver componentes em isolamento, mas é muito provável que ainda assim tenhamos que usar alguns recursos compartilhados com o applicativo, como images, dados, CSS, icones, traduções, etc. E isso é bom porque queremos ter certeza que os componentes vão funcionar da mesma maneira  quando são utilizados no contexto do aplicativo. Por exemplo, se uma biblioteca de traducão é usada, ela provavelmente pode ser utilizada com a mesma configuracão dentro do Storybook. Outro exemplo, se CSS de outras libraries é usado, ele deve ser incluido no Storybook porque assim podemos descrobrir se esse CSS vai ter alguma influência, e muito provavelmente sim, no nosso CSS. O objetivo é evitar surpresas quando integrar o componente no aplicativo.
+Quando nós desenvolvemos em Storybook nós queremos desenvolver componentes em isolamento, mas é muito provável que ainda assim tenhamos que usar alguns recursos compartilhados com o applicativo, como images, dados, CSS, icones, traduções, etc. E isso é bom porque queremos ter certeza que os componentes vão funcionar da mesma maneira quando são utilizados no contexto do aplicativo. Por exemplo, se uma biblioteca de traducão é usada, ela provavelmente pode ser utilizada com a mesma configuracão dentro do Storybook. Outro exemplo, se CSS de outras libraries é usado, ele deve ser incluido no Storybook porque assim podemos descrobrir se esse CSS vai ter alguma influência, e muito provavelmente sim, no nosso CSS. O objetivo é evitar surpresas quando integrar o componente no aplicativo.
 
 ## 8. Mantenha dados sobre controle
 
@@ -145,9 +148,9 @@ Se você perceber que você precisa dos mesmos dados em diferentes stories, pode
 ```js
 const getUser = (overrides = {}) => {
     const defaultValues = {
-        username: "Some User",
-        anchor: "@someuser",
-        image: "https://webapp/static/images/someuser.png"
+        username: 'Some User',
+        anchor: '@someuser',
+        image: 'https://webapp/static/images/someuser.png'
     };
     return Object.assign(defaultValues, overrides);
 };
@@ -161,7 +164,7 @@ Por que funcões fábrica? Para ter certeza de que nós temos um objeto novo tod
 [Decorators](https://storybook.js.org/docs/react/writing-stories/decorators) são basicamente funções que envelopam outro código e dão a ele uma funcionalidade extra. Em Storybook, decorators podem ser aplicados individualmente às stories (chamados de Story Decorators), à todas as stories de um componente (chamados de Component Decorators), ou à todas as stories no projeto (chamados de Global Decorators). A base é essa:
 
 ```jsx
-const myDecorator = (Story) => (
+const myDecorator = Story => (
     <div>
         <Story />
     </div>
@@ -171,9 +174,9 @@ const myDecorator = (Story) => (
 É comum em aplicativos React ter providers ao redor do applicativo ou de partes dele. Se você precisa, por exemplo, que seu código esteja dentro de um provider, usar um decorator é um jeito de resolver o problema. Um outro exemplo bem simples seria adicionar uma margem em algums componentes de forma que eles não encostem nas bordas, você poderia ter um decorator como esse:
 
 ```jsx
-const withMargin = (Story) => (
+const withMargin = Story => (
     <div style={{ margin: '3em' }}>
-        <Story/>
+        <Story />
     </div>
 );
 ```
@@ -193,10 +196,10 @@ Valeu!
 
 ### Referências
 
-- https://storybook.js.org/
-- https://www.learnstorybook.com/
-- https://dev.to/loicgoyet/how-i-manage-to-make-my-storybook-project-the-most-efficient-possible-2d8o
-- https://blog.hichroma.com/the-delightful-storybook-workflow-b322b76fd07?gi=48bcfdd9231b
-- https://www.learnstorybook.com/design-systems-for-developers/react/en/distribute/
-- https://www.richsoni.com/posts/2019-01-29-storybook-architecture-audit/
-- https://github.com/lauthieb/awesome-storybook
+-   https://storybook.js.org/
+-   https://www.learnstorybook.com/
+-   https://dev.to/loicgoyet/how-i-manage-to-make-my-storybook-project-the-most-efficient-possible-2d8o
+-   https://blog.hichroma.com/the-delightful-storybook-workflow-b322b76fd07?gi=48bcfdd9231b
+-   https://www.learnstorybook.com/design-systems-for-developers/react/en/distribute/
+-   https://www.richsoni.com/posts/2019-01-29-storybook-architecture-audit/
+-   https://github.com/lauthieb/awesome-storybook

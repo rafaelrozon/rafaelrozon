@@ -5,25 +5,30 @@ import * as React from 'react';
 import Link from './Link';
 import { usePageContext } from '../context/PageContext';
 
-const LanguageSelector = (): React.ReactElement => {
+interface LanguageSelectorProps {
+    translations: { lang: string; link: string }[];
+}
+const LanguageSelector = ({ translations = [] }: LanguageSelectorProps): React.ReactElement => {
     const theme = useTheme();
-    const { lang, supportedLanguages = [] } = usePageContext();
+    const { lang } = usePageContext();
+    // TODO: change en to enum
+    const sortedTranslations = translations.sort(trans => (trans.lang.toLowerCase() === 'en' ? -1 : 1));
     return (
         <div>
-            {supportedLanguages.map(langCode => (
+            {sortedTranslations.map(langCode => (
                 <Link
                     styles={css`
                         margin-right: 0.5em;
                         text-transform: uppercase;
                         color: ${theme.colors.primary};
-                        border-bottom: ${lang === langCode ? `2px solid ${theme.colors.primary}` : 'none'};
+                        border-bottom: ${lang === langCode.lang ? `2px solid ${theme.colors.primary}` : 'none'};
                         box-shadow: none;
                     `}
-                    key={langCode}
-                    language={langCode}
-                    to={`/${langCode}`}
+                    key={langCode.lang}
+                    language={langCode.lang}
+                    to={`${langCode.link}`}
                 >
-                    {langCode}
+                    {langCode.lang}
                 </Link>
             ))}
         </div>

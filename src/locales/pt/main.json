@@ -7,7 +7,7 @@
     "footer": "Olá! Eu sou o {{author}}. <br />{{authorSummary}}",
     "authorSummary": "Frontend & Arquitetura de Software.",
     "blogDescription": "Um blog sobre Desenvolvimento Frontend, Arquitetura de Software e Developer Experience (DX)",
-    "blogTitle": "Rafael Rozon Blog",
+    "blogTitle": "Rafael Rozon",
     "indexPageTitle": "Home",
     "notFound": "404: Não encontrado",
     "notFoundWarning": "Você acabou the achar uma página que não existe. Triste...",
@@ -23,5 +23,8 @@
     "firstName": "Nome",
     "email": "Email",
     "subscribe": "Assinar",
-    "noPostsFound": "Nenhum blog post encontrado."
+    "noPostsFound": "Nenhum blog post encontrado.",
+    "timeToRead": "{{time}} minutos",
+    "readLater": "Ler depois",
+    "copied": "Copiado"
 }

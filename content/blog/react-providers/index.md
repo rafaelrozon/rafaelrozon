@@ -4,6 +4,9 @@ date: '2021-06-01T24:00:00Z'
 description: 'Centralizing React Providers for better maintenance and readability.'
 lang: 'en'
 path: 'one-react-provider'
+coverImg: 'https://res.cloudinary.com/rafael-rozon-developer/image/upload/c_scale,h_480/v1625057619/lucas-van-oort-2k7KnGSc6Q8-unsplash_tx4bit.jpg'
+coverImgAlt: "Picture with word 'One'"
+coverImgCredit: 'Photo by [Lucas van Oort](https://unsplash.com/@switch_dtp_fotografie)'
 ---
 
 I have written and seen code like this in React apps:
