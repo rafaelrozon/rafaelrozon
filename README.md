@@ -14,19 +14,3 @@ If you want to reach me, the easiest way is through [Twitter](https://twitter.co
 
 I write about software development and career on [rafaelrozon.com](https://www.rafaelrozon.com).
 
-## TO DO
-
--   [x] Update README with instructions
--   [ ] Add unit tests
--   [ ] Update Github settings
--   [ ] add analytics
--   [x] update license
--   [x] fix photo
--   [x] review texts
--   [ ] tests?
--   [x] convert to typescript
--   [ ] favicon
--   [ ] create banner
--   [ ] create banner for code snippets with my name on it
--   [x] update package.json
--   [x] lint staged
