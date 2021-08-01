@@ -39,6 +39,7 @@
         "build": "gatsby build",
         "clean": "gatsby clean",
         "cm": "cz",
+        "deploy": "firebase deploy --only hosting",
         "develop": "gatsby develop",
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "format:check": "prettier --check \"$PWD/src/**/*.[tj]s\"",
@@ -48,8 +49,7 @@
         "prepare": "husky install",
         "serve": "gatsby serve",
         "start": "npm run develop",
-        "test": "jest",
-        "deploy": "firebase deploy --only hosting"
+        "test": "jest"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx,json,md}": "prettier --write",
@@ -73,6 +73,7 @@
         "gatsby-plugin-fontawesome-css": "^1.1.0",
         "gatsby-plugin-gatsby-cloud": "^2.2.0",
         "gatsby-plugin-google-analytics": "^3.2.0",
+        "gatsby-plugin-google-gtag": "^3.10.0",
         "gatsby-plugin-image": "^1.2.0",
         "gatsby-plugin-mailchimp": "^5.2.2",
         "gatsby-plugin-manifest": "^3.2.0",

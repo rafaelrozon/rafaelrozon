@@ -69,9 +69,12 @@ module.exports = {
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
         {
-            resolve: `gatsby-plugin-google-analytics`,
+            resolve: `gatsby-plugin-google-gtag`,
             options: {
-                trackingId: `G-KB3JGF9JDZ`
+                trackingIds: [`G-JYN97M3XE7`],
+                pluginConfig: {
+                    head: true
+                }
             }
         },
         {
@@ -163,7 +166,6 @@ module.exports = {
             options: {
                 endpoint: process.env.MAILCHIMP_ENDPOINT
             }
-        },
-
+        }
     ]
 };

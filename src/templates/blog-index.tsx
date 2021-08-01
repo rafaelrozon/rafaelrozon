@@ -38,7 +38,6 @@ interface BlogIndexProps {
 }
 
 const BlogIndex = ({ data, location, pageContext }: BlogIndexProps): React.ReactElement => {
-    console.log('location: ', location);
     const { t } = useTranslation();
     const theme = useTheme();
     const { lang } = pageContext;

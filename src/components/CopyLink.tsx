@@ -14,7 +14,6 @@ interface CopyLinkProps {
 }
 
 const CopyLink = ({ text, styles }: CopyLinkProps): React.ReactElement => {
-    console.log('styles: ', styles);
     const { t } = useTranslation();
     const theme = useTheme();
     const [isCopied, setCopiedState] = React.useState(false);
